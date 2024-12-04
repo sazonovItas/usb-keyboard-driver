@@ -1,1 +1,0 @@
-cmd_/home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments   -r -o /home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.o @/home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.mod 
