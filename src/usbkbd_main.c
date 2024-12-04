@@ -28,10 +28,10 @@
 #define NAME_BUF_LEN 128
 #define PHYS_BUF_LEN 64
 
-#define KEY_PRESSED 1
 #define KEY_RELEASED 0
+#define KEY_PRESSED 1
 
-static const unsigned char usb_kbd_keycode[KEYCODE_BUF_LEN] = {
+static const u8 usb_kbd_keycode[KEYCODE_BUF_LEN] = {
     0,   0,   0,   0,   30,  48,  46,  32,  18,  33,  34,  35,  23,  36,  37,
     38,  50,  49,  24,  25,  16,  19,  31,  20,  22,  47,  17,  45,  21,  44,
     2,   3,   4,   5,   6,   7,   8,   9,   10,  11,  28,  1,   14,  15,  57,
@@ -70,7 +70,7 @@ struct usb_kbd {
   bool mode;
 };
 
-void *memscanf(void *start, int value, __kernel_size_t sz) {
+void *__memscan_s(void *start, int value, __kernel_size_t sz) {
   void *pos = memscan(start, value, sz);
   if (pos == start + sz)
     return NULL;
@@ -99,10 +99,7 @@ static void usb_kbd_irq(struct urb *urb) {
                      (kbd->new[0] >> i) & 1);
 
   for (int i = 2; i < 8; i++) {
-    if (kbd->old[i] <= 3)
-      continue;
-
-    if (memscan(kbd->new + 2, kbd->old[i], 6) == NULL) {
+    if (kbd->old[i] > 3 && __memscan_s(kbd->new + 2, kbd->old[i], 6) == NULL) {
       if (usb_kbd_keycode[kbd->old[i]])
         input_report_key(kbd->indev, usb_kbd_keycode[kbd->old[i]],
                          KEY_RELEASED);
@@ -111,7 +108,7 @@ static void usb_kbd_irq(struct urb *urb) {
                  kbd->old[i]);
     }
 
-    if (memscan(kbd->old + 2, kbd->new[i], 6) == NULL) {
+    if (kbd->new[i] > 3 && __memscan_s(kbd->old + 2, kbd->new[i], 6) == NULL) {
       if (usb_kbd_keycode[kbd->new[i]])
         input_report_key(kbd->indev, usb_kbd_keycode[kbd->new[i]], KEY_PRESSED);
       else

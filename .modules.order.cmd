@@ -1,0 +1,1 @@
+cmd_/home/itas/workspace/projects/linux-drivers/usbkbd/modules.order := {   echo /home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.ko; :; } > /home/itas/workspace/projects/linux-drivers/usbkbd/modules.order

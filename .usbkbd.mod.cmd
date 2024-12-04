@@ -1,0 +1,1 @@
+cmd_/home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.mod := printf '%s\n'   src/usbkbd_main.o | awk '!x[$$0]++ { print("/home/itas/workspace/projects/linux-drivers/usbkbd/"$$0) }' > /home/itas/workspace/projects/linux-drivers/usbkbd/usbkbd.mod

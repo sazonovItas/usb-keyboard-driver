@@ -1,0 +1,1 @@
+cmd_/home/itas/workspace/projects/linux-drivers/usbkbd/Module.symvers :=  sed 's/ko$$/o/'  /home/itas/workspace/projects/linux-drivers/usbkbd/modules.order | scripts/mod/modpost -m      -o /home/itas/workspace/projects/linux-drivers/usbkbd/Module.symvers -e -i Module.symvers -T - 
