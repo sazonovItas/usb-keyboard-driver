@@ -6,3 +6,4 @@ if [ ! -z "$(lsmod | grep "^$DRIVER_NAME")" ]; then
 fi
 
 make && sudo insmod "${DRIVER_NAME}.ko"
+make clean
