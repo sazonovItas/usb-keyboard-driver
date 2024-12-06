@@ -1,11 +1,3 @@
-#ifndef __KERNEL__
-#define __KERNEL__
-#endif
-
-#ifndef KBUILD_MODNAME
-#define KBUILD_MODNAME "usbkbd"
-#endif
-
 #include <linux/hid.h>
 #include <linux/init.h>
 #include <linux/kernel.h>
